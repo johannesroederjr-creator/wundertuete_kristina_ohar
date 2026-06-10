@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wundertüte Lauf — Schreibwaren, Kiosk & Service am Marktplatz</title>
+  <meta name="description" content="Wundertüte in Lauf an der Pegnitz: Schreibwaren, Büromaterial, Druckservice, Heliumballons, Snacks und Lotto. Mo–Fr 8–18 Uhr · Sa 8–13 Uhr. Marktplatz 4." />
+  <meta name="theme-color" content="#1F1D1A" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Wundertüte — Ihr Schreibwarenladen am Marktplatz Lauf" />
+  <meta property="og:description" content="Mehr als ein Schreibwarenladen. Von Schulmaterial bis Heliumballon — mit Service zum Anfassen." />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="de_DE" />
+
+  <!-- Favicon Platzhalter (kleines goldenes Quadrat als SVG) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%231F1D1A'/><text x='50%25' y='58%25' font-family='serif' font-size='40' fill='%23D4A24C' text-anchor='middle' font-weight='700'>W</text></svg>" />
+
+  <link rel="stylesheet" href="fonts.css" />
+  <link rel="stylesheet" href="cookie-consent.css" />
+
+  <style>
+    /* =============================================================
+       DESIGN TOKENS — Farbvariablen, Spacings, Typografie
+       ============================================================= */
+    :root {
+      /* Primärfarben */
+      --color-anthracite: #1F1D1A;
+      --color-anthracite-soft: #2C2925;
+      --color-gold: #D4A24C;
+      --color-gold-bright: #E8BE63;
+
+      /* Akzent */
+      --color-green: #6B8E4E;
+      --color-green-bright: #8AAD6A;
+
+      /* Neutrals */
+      --color-cream: #F5EFE3;
+      --color-cream-soft: #EAE3D2;
+      --color-text-on-dark: #F5EFE3;
+      --color-text-on-light: #1F1D1A;
+      --color-text-muted: #8A857B;
+      --color-border: rgba(212, 162, 76, 0.2);
+
+      /* Schatten — warm getönt */
+      --shadow-sm: 0 1px 2px rgba(45, 30, 10, 0.08);
+      --shadow-md: 0 8px 24px rgba(45, 30, 10, 0.12);
+      --shadow-lg: 0 16px 48px rgba(45, 30, 10, 0.18);
+
+      /* Spacings */
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2.5rem;
+      --space-xl: 4rem;
+      --space-2xl: 6rem;
+
+      /* Radien */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+      --radius-pill: 999px;
+
+      /* Schrift */
+      --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+      --font-body: 'Inter Tight', system-ui, -apple-system, sans-serif;
+
+      /* Breakpoints (für JS-Lesbarkeit dokumentiert) */
+      --bp-sm: 640px;
+      --bp-md: 960px;
+      --bp-lg: 1280px;
+
+      /* Header-Höhe */
+      --header-h: 72px;
+    }
+
+    /* =============================================================
+       RESET & BASE
+       ============================================================= */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: var(--header-h); }
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--color-text-on-light);
+      background: var(--color-cream);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    img, svg { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.15;
+      margin: 0 0 var(--space-sm) 0;
+    }
+    p { margin: 0 0 var(--space-sm) 0; }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+    }
+
+    /* Fokus-Styles für A11y */
+    :focus-visible {
+      outline: 2px solid var(--color-gold-bright);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* Sektion Padding */
+    .section {
+      padding: var(--space-2xl) 0;
+      position: relative;
+    }
+    .section--dark {
+      background: var(--color-anthracite);
+      color: var(--color-text-on-dark);
+    }
+    .section--light {
+      background: var(--color-cream);
+      color: var(--color-text-on-light);
+    }
+
+    /* Grain Overlay für dunkle Sektionen */
+    .section--dark::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.07;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.9'/%3E%3C/svg%3E");
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      margin-bottom: var(--space-sm);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      padding: 0.85rem 1.45rem;
+      font-weight: 600;
+      font-size: 0.97rem;
+      border-radius: var(--radius-pill);
+      transition: transform 0.18s ease, box-shadow 0.22s ease, background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      min-height: 44px;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      white-space: nowrap;
+    }
+    .btn--primary {
+      background: var(--color-gold);
+      color: var(--color-anthracite);
+    }
+    .btn--primary:hover {
+      background: var(--color-gold-bright);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(212, 162, 76, 0.35);
+    }
+    .btn--outline {
+      background: transparent;
+      color: var(--color-gold);
+      border-color: var(--color-gold);
+    }
+    .btn--outline:hover {
+      background: rgba(212, 162, 76, 0.12);
+      color: var(--color-gold-bright);
+      transform: translateY(-1px);
+    }
+    .btn--green {
+      background: var(--color-green);
+      color: var(--color-cream);
+    }
+    .btn--green:hover {
+      background: var(--color-green-bright);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(107, 142, 78, 0.35);
+    }
+    .btn--ghost {
+      background: rgba(245, 239, 227, 0.06);
+      color: var(--color-text-on-dark);
+      border-color: var(--color-border);
+    }
+    .btn--ghost:hover {
+      background: rgba(212, 162, 76, 0.12);
+      border-color: var(--color-gold);
+    }
+
+    /* =============================================================
+       SEKTION 1: HEADER (sticky)
+       ============================================================= */
+    .site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: var(--header-h);
+      background: rgba(31, 29, 26, 0.55);
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
+      transition: background 0.3s ease, backdrop-filter 0.3s ease, height 0.3s ease, box-shadow 0.3s ease;
+      border-bottom: 1px solid transparent;
+    }
+    .site-header.is-scrolled {
+      background: rgba(31, 29, 26, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom-color: var(--color-border);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+    }
+    .site-header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      color: var(--color-gold);
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .brand-mark {
+      width: 4.5rem;
+      height: 4.5rem;
+      flex-shrink: 0;
+      object-fit: contain;
+    }
+    .nav-desktop {
+      display: none;
+      gap: var(--space-lg);
+    }
+    .nav-desktop a {
+      color: var(--color-cream);
+      font-size: 0.95rem;
+      font-weight: 500;
+      position: relative;
+      padding: 0.3rem 0;
+      transition: color 0.2s ease;
+    }
+    .nav-desktop a::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: -2px;
+      height: 2px;
+      background: var(--color-gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+    .nav-desktop a:hover { color: var(--color-gold); }
+    .nav-desktop a:hover::after { transform: scaleX(1); }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .icon-btn {
+      width: 44px; height: 44px;
+      display: grid; place-items: center;
+      border-radius: var(--radius-pill);
+      color: var(--color-cream);
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .icon-btn:hover { background: rgba(212, 162, 76, 0.15); color: var(--color-gold); }
+    .header-actions .btn { padding: 0.6rem 1.1rem; font-size: 0.9rem; }
+
+    .burger {
+      display: grid;
+      place-items: center;
+      width: 44px; height: 44px;
+      border-radius: var(--radius-pill);
+      color: var(--color-cream);
+    }
+    .burger:hover { background: rgba(212, 162, 76, 0.15); color: var(--color-gold); }
+
+    /* Mobile-Nav-Overlay */
+    .mobile-nav {
+      position: fixed;
+      inset: var(--header-h) 0 0 0;
+      background: rgba(31, 29, 26, 0.97);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 95;
+      display: flex;
+      flex-direction: column;
+      padding: var(--space-xl) var(--space-md);
+      gap: var(--space-md);
+      transform: translateY(-110%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .mobile-nav.is-open { transform: translateY(0); }
+    .mobile-nav a {
+      color: var(--color-cream);
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .mobile-nav a:hover { color: var(--color-gold); }
+
+    @media (min-width: 960px) {
+      .nav-desktop { display: flex; }
+      .burger { display: none; }
+    }
+
+    /* =============================================================
+       SEKTION 2: HERO
+       ============================================================= */
+    .hero {
+      position: relative;
+      padding-top: calc(var(--header-h) + var(--space-xl));
+      padding-bottom: var(--space-2xl);
+      background: var(--color-anthracite);
+      color: var(--color-text-on-dark);
+      overflow: hidden;
+      text-align: center;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 30%, rgba(212, 162, 76, 0.12), transparent 70%),
+        radial-gradient(ellipse 40% 30% at 50% 100%, rgba(212, 162, 76, 0.08), transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.08;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .hero-ornament {
+      position: absolute;
+      width: 180px;
+      opacity: 0.08;
+      pointer-events: none;
+    }
+    .hero-ornament--left { top: 14%; left: -20px; transform: rotate(-12deg); }
+    .hero-ornament--right { bottom: 16%; right: -20px; transform: rotate(15deg); }
+
+    .hero-content { position: relative; z-index: 2; max-width: 820px; margin: 0 auto; }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 11vw, 6.5rem);
+      font-weight: 600;
+      color: var(--color-gold);
+      letter-spacing: -0.03em;
+      margin-bottom: var(--space-md);
+      line-height: 1;
+      font-style: italic;
+    }
+    .hero-subline {
+      font-size: clamp(1.05rem, 2.2vw, 1.3rem);
+      color: var(--color-cream);
+      max-width: 620px;
+      margin: 0 auto var(--space-lg);
+      line-height: 1.55;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+    }
+    .hero-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.55rem 1.1rem;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-pill);
+      font-size: 0.88rem;
+      color: var(--color-cream);
+      background: rgba(245, 239, 227, 0.04);
+    }
+    .live-dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--color-green-bright);
+      box-shadow: 0 0 0 0 rgba(138, 173, 106, 0.6);
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(138, 173, 106, 0.6); }
+      50% { box-shadow: 0 0 0 8px rgba(138, 173, 106, 0); }
+    }
+    .live-dot.is-closed { background: var(--color-text-muted); animation: none; }
+
+    .hero-gradient-fade {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 80px;
+      background: linear-gradient(to bottom, transparent, rgba(212, 162, 76, 0.06));
+      pointer-events: none;
+    }
+
+    /* =============================================================
+       SEKTION 3: SCHNELL-INFO
+       ============================================================= */
+    .quickinfo .section-head {
+      text-align: center;
+      margin-bottom: var(--space-xl);
+    }
+    .quickinfo h2 {
+      font-size: clamp(2rem, 4.5vw, 2.8rem);
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+    @media (min-width: 720px) { .info-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .info-card {
+      background: var(--color-anthracite);
+      color: var(--color-text-on-dark);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--color-border);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .info-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+    .info-icon {
+      width: 52px; height: 52px;
+      border-radius: var(--radius-md);
+      background: rgba(212, 162, 76, 0.1);
+      border: 1px solid var(--color-border);
+      display: grid; place-items: center;
+      color: var(--color-gold);
+    }
+    .info-card h3 {
+      font-size: 1.35rem;
+      color: var(--color-gold);
+      margin: 0;
+    }
+    .info-card .hours-table {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.4rem 1rem;
+      font-size: 0.95rem;
+    }
+    .info-card .hours-table dt { color: var(--color-text-muted); }
+    .info-card .hours-table dd { margin: 0; color: var(--color-cream); }
+    .info-card address {
+      font-style: normal;
+      font-size: 0.98rem;
+      line-height: 1.6;
+      color: var(--color-cream);
+    }
+    .info-card .card-actions {
+      margin-top: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      padding-top: var(--space-sm);
+    }
+    .info-card .card-actions .btn { padding: 0.55rem 1rem; font-size: 0.85rem; min-height: 38px; }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--color-green-bright);
+      font-weight: 500;
+    }
+    .status-pill.is-closed { color: var(--color-text-muted); }
+
+    /* =============================================================
+       SEKTION 4: SORTIMENT
+       ============================================================= */
+    .sortiment .section-head {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto var(--space-xl);
+    }
+    .sortiment h2 {
+      font-size: clamp(2rem, 4.5vw, 2.8rem);
+      color: var(--color-gold);
+    }
+    .sortiment .lead {
+      font-size: 1.1rem;
+      color: var(--color-cream);
+      opacity: 0.9;
+    }
+    .cat-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-sm);
+    }
+    @media (min-width: 600px) { .cat-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 960px) { .cat-grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (min-width: 1200px) { .cat-grid { grid-template-columns: repeat(4, 1fr); } }
+
+    .cat-card {
+      background: var(--color-anthracite-soft);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .cat-card::after {
+      content: "";
+      position: absolute;
+      left: var(--space-md);
+      bottom: var(--space-sm);
+      width: 32px;
+      height: 2px;
+      background: var(--color-green);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .cat-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--color-gold);
+      background: var(--color-anthracite-soft);
+    }
+    .cat-card:hover::after { transform: scaleX(1); }
+    .cat-icon { color: var(--color-gold); }
+    .cat-card h3 { font-size: 1.15rem; margin: 0; color: var(--color-cream); }
+    .cat-card p { font-size: 0.92rem; color: var(--color-text-muted); margin: 0; line-height: 1.5; }
+
+    .hint-box {
+      margin-top: var(--space-xl);
+      padding: var(--space-md) var(--space-lg);
+      background: rgba(107, 142, 78, 0.12);
+      border: 1px solid rgba(138, 173, 106, 0.3);
+      border-radius: var(--radius-md);
+      text-align: center;
+      color: var(--color-cream);
+      font-size: 1.02rem;
+      font-style: italic;
+    }
+    .hint-box strong { color: var(--color-green-bright); font-style: normal; }
+
+    /* =============================================================
+       SEKTION 5: ÜBER UNS
+       ============================================================= */
+    .about .layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+      align-items: start;
+    }
+    @media (min-width: 960px) { .about .layout { grid-template-columns: 1.1fr 1fr; gap: var(--space-2xl); } }
+
+    .about h2 {
+      font-size: clamp(2rem, 4.5vw, 2.8rem);
+      color: var(--color-anthracite);
+    }
+    .about p {
+      color: #4a4640;
+      font-size: 1.02rem;
+      line-height: 1.7;
+    }
+    .about-photo {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      aspect-ratio: 4 / 5;
+      background: var(--color-anthracite-soft);
+    }
+    .about-photo img {
+      width: 100%; height: 100%; object-fit: cover;
+      filter: saturate(0.92);
+    }
+    .about-photo .photo-tag {
+      position: absolute;
+      bottom: var(--space-md); left: var(--space-md);
+      background: rgba(31, 29, 26, 0.75);
+      backdrop-filter: blur(8px);
+      color: var(--color-gold);
+      padding: 0.45rem 0.9rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      border: 1px solid var(--color-border);
+    }
+
+    .quote-block {
+      margin: var(--space-lg) 0;
+      padding: var(--space-md) var(--space-lg);
+      border-left: 3px solid var(--color-gold);
+      background: rgba(212, 162, 76, 0.05);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      position: relative;
+    }
+    .quote-block::before {
+      content: "“";
+      position: absolute;
+      top: -0.4rem; left: 0.6rem;
+      font-family: var(--font-display);
+      font-size: 4rem;
+      color: var(--color-gold);
+      opacity: 0.45;
+      line-height: 1;
+    }
+    .quote-block.large {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      line-height: 1.45;
+      color: var(--color-anthracite);
+      font-style: italic;
+    }
+    .quote-block.small {
+      font-size: 1.05rem;
+      color: #4a4640;
+      font-style: italic;
+    }
+    .quote-block cite {
+      display: block;
+      margin-top: 0.55rem;
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      font-style: normal;
+      letter-spacing: 0.04em;
+    }
+
+    /* =============================================================
+       SEKTION 6: NACHHALTIGKEIT
+       ============================================================= */
+    .nachhaltigkeit .section-head {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto var(--space-xl);
+    }
+    .nachhaltigkeit h2 {
+      font-size: clamp(2rem, 4.5vw, 2.8rem);
+      color: var(--color-green-bright);
+    }
+    .nachhaltigkeit .lead {
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--color-cream);
+      opacity: 0.9;
+    }
+    .nh-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
+    @media (min-width: 720px) { .nh-grid { grid-template-columns: repeat(3, 1fr); } }
+    .nh-item { text-align: center; padding: 0 var(--space-sm); }
+    .nh-icon {
+      width: 72px; height: 72px;
+      margin: 0 auto var(--space-sm);
+      background: rgba(212, 162, 76, 0.12);
+      border-radius: var(--radius-pill);
+      display: grid; place-items: center;
+      color: var(--color-gold-bright);
+    }
+    .nh-item h3 { font-size: 1.25rem; color: var(--color-gold-bright); margin-bottom: 0.5rem; }
+    .nh-item p { color: var(--color-cream); opacity: 0.88; font-size: 0.97rem; line-height: 1.6; }
+
+    /* =============================================================
+       SEKTION 8: FEEDBACK
+       ============================================================= */
+    .feedback {
+      text-align: center;
+    }
+    .feedback .inner { max-width: 720px; margin: 0 auto; }
+    .feedback h2 {
+      font-size: clamp(2rem, 4.5vw, 2.8rem);
+      color: var(--color-anthracite);
+    }
+    .feedback p {
+      font-size: 1.1rem;
+      color: #4a4640;
+      margin-bottom: var(--space-lg);
+    }
+    .feedback-fallback {
+      display: none;
+      margin-top: var(--space-md);
+      padding: var(--space-md);
+      background: rgba(107, 142, 78, 0.08);
+      border: 1px solid rgba(31, 29, 26, 0.1);
+      border-radius: var(--radius-md);
+      color: #4a4640;
+      font-size: 0.97rem;
+    }
+    .feedback-fallback.is-open { display: block; }
+
+    /* =============================================================
+       SEKTION 9: KONTAKT
+       ============================================================= */
+    .kontakt .layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+    @media (min-width: 960px) { .kontakt .layout { grid-template-columns: 1fr 1.2fr; } }
+
+    .kontakt h2 {
+      font-size: clamp(2rem, 4.5vw, 2.8rem);
+      color: var(--color-gold);
+    }
+    .kontakt .contact-block address {
+      font-style: normal;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--color-cream);
+      margin-bottom: var(--space-md);
+    }
+    .kontakt .contact-block .label-mini {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .contact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .contact-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 1rem;
+    }
+    .contact-list li svg { color: var(--color-gold); flex-shrink: 0; }
+    .contact-list a:hover { color: var(--color-green); text-decoration: underline; }
+
+    .pay-block {
+      margin-top: var(--space-md);
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--color-border);
+      font-size: 0.95rem;
+      color: var(--color-cream);
+      opacity: 0.9;
+    }
+    .pay-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+    .pay-tags span {
+      padding: 0.3rem 0.75rem;
+      background: rgba(212, 162, 76, 0.12);
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+    }
+
+    .map-frame {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--color-gold);
+      box-shadow: var(--shadow-md);
+      height: 400px;
+      background: var(--color-cream-soft);
+    }
+    .map-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+    /* =============================================================
+       SEKTION 10: FOOTER
+       ============================================================= */
+    .site-footer {
+      background: var(--color-anthracite);
+      color: var(--color-cream);
+      padding: var(--space-xl) 0 var(--space-md);
+      border-top: 1px solid var(--color-border);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+      margin-bottom: var(--space-lg);
+    }
+    @media (min-width: 720px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
+
+    .footer-brand .brand { font-size: 1.6rem; margin-bottom: 0.6rem; }
+    .footer-brand p { color: var(--color-text-muted); font-size: 0.95rem; max-width: 360px; }
+    .footer-col h4 {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-gold);
+      margin-bottom: var(--space-sm);
+      font-weight: 600;
+    }
+    .footer-col ul {
+      list-style: none;
+      padding: 0; margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .footer-col a {
+      color: var(--color-cream);
+      opacity: 0.85;
+      font-size: 0.95rem;
+      transition: color 0.2s ease, opacity 0.2s ease;
+    }
+    .footer-col a:hover { color: var(--color-gold); opacity: 1; }
+
+    .footer-bottom {
+      padding-top: var(--space-md);
+      border-top: 1px solid var(--color-border);
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+    }
+
+    /* =============================================================
+       SCROLL-REVEAL
+       ============================================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* Platzhalter-Tag (sichtbar) */
+    .ph {
+      display: inline-block;
+      padding: 0.05rem 0.45rem;
+      border: 1px dashed var(--color-gold);
+      border-radius: 4px;
+      color: var(--color-gold);
+      font-size: 0.88em;
+      font-family: ui-monospace, SFMono-Regular, monospace;
+      background: rgba(212, 162, 76, 0.08);
+    }
+    .section--light .ph {
+      color: #b3832c;
+      border-color: #b3832c;
+      background: rgba(179, 131, 44, 0.08);
+    }
+  </style>
+</head>
+<body>
+  <!-- =============================================================
+       HEADER
+       ============================================================= -->
+  <header class="site-header" id="siteHeader">
+    <div class="container">
+      <a href="#top" class="brand" aria-label="Wundertüte Startseite">
+        <img src="Wundertuete_Logo_Paket_transparent.png" alt="" class="brand-mark" width="72" height="72" aria-hidden="true">
+        <span>Wundertüte</span>
+      </a>
+
+      <nav class="nav-desktop" aria-label="Hauptnavigation">
+        <a href="#sortiment">Sortiment</a>
+        <a href="#about">Über uns</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="tel:+49" class="btn btn--primary" aria-label="Anrufen">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span class="anrufen-label">Anrufen</span>
+        </a>
+        <a href="https://www.instagram.com/wundertuete2026/" class="icon-btn" aria-label="Instagram" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <button class="burger" id="burgerBtn" aria-label="Menü öffnen" aria-controls="mobileNav" aria-expanded="false">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile Navigation">
+    <a href="#sortiment">Sortiment</a>
+    <a href="#about">Über uns</a>
+    <a href="#nachhaltigkeit">Nachhaltigkeit</a>
+    <a href="#feedback">Feedback</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
+
+  <main id="top">
+    <!-- =============================================================
+         SEKTION 2: HERO
+         ============================================================= -->
+    <section class="hero">
+      <!-- Geschenkbox-SVG-Ornamente -->
+      <svg class="hero-ornament hero-ornament--left" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <rect x="14" y="38" width="72" height="50" rx="3" stroke="#D4A24C" stroke-width="2"/>
+        <rect x="14" y="38" width="72" height="14" rx="3" stroke="#D4A24C" stroke-width="2" fill="rgba(212,162,76,0.15)"/>
+        <line x1="50" y1="38" x2="50" y2="88" stroke="#D4A24C" stroke-width="2"/>
+        <path d="M50 38 C 30 18, 20 28, 36 36 Z" stroke="#D4A24C" stroke-width="2" fill="none"/>
+        <path d="M50 38 C 70 18, 80 28, 64 36 Z" stroke="#D4A24C" stroke-width="2" fill="none"/>
+      </svg>
+      <svg class="hero-ornament hero-ornament--right" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+        <rect x="14" y="38" width="72" height="50" rx="3" stroke="#D4A24C" stroke-width="2"/>
+        <rect x="14" y="38" width="72" height="14" rx="3" stroke="#D4A24C" stroke-width="2" fill="rgba(212,162,76,0.15)"/>
+        <line x1="50" y1="38" x2="50" y2="88" stroke="#D4A24C" stroke-width="2"/>
+        <path d="M50 38 C 30 18, 20 28, 36 36 Z" stroke="#D4A24C" stroke-width="2" fill="none"/>
+        <path d="M50 38 C 70 18, 80 28, 64 36 Z" stroke="#D4A24C" stroke-width="2" fill="none"/>
+      </svg>
+
+      <div class="container hero-content">
+        <span class="eyebrow">Schreibwaren · Kiosk · Marktplatz Lauf</span>
+        <h1>Wundertüte</h1>
+        <p class="hero-subline">
+          Ein Laden für die Bewohner von Lauf. Mit allem, was den Alltag schöner macht —
+          und einem Ohr für Ihre Wünsche.
+        </p>
+        <div class="hero-actions">
+          <a href="#quickinfo" class="btn btn--primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Heute geöffnet — Anfahrt
+          </a>
+          <a href="tel:+49" class="btn btn--outline">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Anrufen
+          </a>
+        </div>
+        <div class="hero-status" id="heroStatus">
+          <span class="live-dot" id="heroStatusDot" aria-hidden="true"></span>
+          <span id="heroStatusText">Mo–Fr 8–18 Uhr · Sa 8–13 Uhr</span>
+        </div>
+      </div>
+      <div class="hero-gradient-fade" aria-hidden="true"></div>
+    </section>
+
+    <!-- =============================================================
+         SEKTION 3: SCHNELL-INFO
+         ============================================================= -->
+    <section class="section section--light quickinfo" id="quickinfo">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow" style="color:#b3832c;">Auf einen Blick</span>
+          <h2>Alles, was Sie jetzt wissen müssen</h2>
+        </div>
+
+        <div class="info-grid">
+          <!-- Karte 1: Öffnungszeiten -->
+          <article class="info-card reveal">
+            <div class="info-icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h3>Öffnungszeiten</h3>
+            <dl class="hours-table">
+              <dt>Mo – Fr</dt><dd>8:00 – 18:00 Uhr</dd>
+              <dt>Samstag</dt><dd>8:00 – 13:00 Uhr</dd>
+              <dt>Sonntag</dt><dd>geschlossen</dd>
+            </dl>
+            <div class="status-pill" id="openStatus" role="status" aria-live="polite">
+              <span class="live-dot" id="openStatusDot" aria-hidden="true"></span>
+              <span id="openStatusText">Status wird berechnet…</span>
+            </div>
+          </article>
+
+          <!-- Karte 2: Standort -->
+          <article class="info-card reveal">
+            <div class="info-icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <h3>So finden Sie uns</h3>
+            <address>
+              Wundertüte<br>
+              Marktplatz 4<br>
+              91207 Lauf an der Pegnitz
+            </address>
+            <div class="card-actions">
+              <a class="btn btn--outline" href="https://maps.google.com/?q=Marktplatz+4,+91207+Lauf+an+der+Pegnitz" target="_blank" rel="noopener">Google Maps</a>
+              <a class="btn btn--ghost" href="https://maps.apple.com/?address=Marktplatz%204,%2091207%20Lauf%20an%20der%20Pegnitz" target="_blank" rel="noopener">Apple Maps</a>
+            </div>
+          </article>
+
+          <!-- Karte 3: Direkt erreichen -->
+          <article class="info-card reveal">
+            <div class="info-icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <h3>Wir sind für Sie da</h3>
+            <div>
+              <p style="margin: 0 0 0.3rem 0; color: var(--color-cream);">Telefon: <span class="ph">[TELEFON]</span></p>
+              <p style="margin: 0 0 0.3rem 0; color: var(--color-cream);">E-Mail: <span class="ph">[E-MAIL]</span></p>
+              <p style="margin: 0; color: var(--color-text-muted); font-size: 0.9rem;">WhatsApp: folgt</p>
+            </div>
+            <div class="card-actions">
+              <a class="btn btn--outline" href="tel:+49">Anrufen</a>
+              <a class="btn btn--ghost" href="https://wa.me/49">WhatsApp</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================================
+         SEKTION 4: SORTIMENT
+         ============================================================= -->
+    <section class="section section--dark sortiment" id="sortiment">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Sortiment</span>
+          <h2>Mehr als ein Schreibwarenladen.</h2>
+          <p class="lead">
+            Vom Schulheft bis zum Heliumballon, vom Lottoschein bis zur Pokémon-Karte —
+            bei uns finden Sie das, was Sie brauchen, und einiges, was Sie überraschen wird.
+          </p>
+        </div>
+
+        <div class="cat-grid">
+          <!-- Schreibwaren -->
+          <article class="cat-card reveal">
+            <span class="cat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></span>
+            <h3>Schreibwaren</h3>
+            <p>Stifte, Hefte, Mappen, Kalender — auch nachfüllbare Modelle.</p>
+          </article>
+
+          <!-- Büromaterial -->
+          <article class="cat-card reveal">
+            <span class="cat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+            <h3>Büromaterial</h3>
+            <p>Ordner, Klebeband, Etiketten, alles fürs Home-Office.</p>
+          </article>
+
+          <!-- Druckservice -->
+          <article class="cat-card reveal">
+            <span class="cat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg></span>
+            <h3>Druckservice</h3>
+            <p>Kopieren, Scannen, Drucken — schnell und unkompliziert.</p>
+          </article>
+
+          <!-- Kleine Geschenke -->
+          <article class="cat-card reveal">
+            <span class="cat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg></span>
+            <h3>Kleine Geschenke</h3>
+            <p>Liebevoll ausgesucht, regional und überraschend.</p>
+          </article>
+
+          <!-- Pokémon-Karten -->
+          <article class="cat-card reveal">
+            <span class="cat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><line x1="5" y1="12" x2="19" y2="12"/><circle cx="12" cy="12" r="2"/></svg></span>
+            <h3>Pokémon-Karten</h3>
+            <p>Aktuelle Editionen, beliebt bei Kids und Sammlern.</p>
+          </article>
+
+          <!-- Heliumballons -->
+          <article class="cat-card reveal">
+            <span class="cat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C7 2 4 5.5 4 10c0 4.5 4 7.5 7 7.5s7-3 7-7.5C18 5.5 17 2 12 2z"/><path d="M12 17.5v2"/><path d="M10 21h4"/></svg></span>
+            <h3>Heliumballons</h3>
+            <p>Mit Befüllung vor Ort, auch zu Themen und Geburtstagen.</p>
+          </article>
+
+          <!-- Tabakwaren -->
+          <article class="cat-card reveal">
+            <span class="cat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="9" width="20" height="6" rx="1"/><line x1="6" y1="9" x2="6" y2="15"/><line x1="18" y1="9" x2="18" y2="15"/></svg></span>
+            <h3>Tabakwaren</h3>
+            <p>Klassisches Kiosk-Sortiment.</p>
+          </article>
+
+          <!-- Snacks & Getränke -->
+          <article class="cat-card reveal">
+            <span class="cat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2h8l-1 6H9L8 2z"/><path d="M9 8h6v13a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V8z"/></svg></span>
+            <h3>Snacks & Getränke</h3>
+            <p>Für den schnellen Stopp am Marktplatz.</p>
+          </article>
+
+          <!-- Lotto & Toto -->
+          <article class="cat-card reveal">
+            <span class="cat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
+            <h3>Lotto & Toto</h3>
+            <p>Spielen Sie Ihren Tipp bei uns.</p>
+          </article>
+
+          <!-- Zeitschriften -->
+          <article class="cat-card reveal">
+            <span class="cat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/></svg></span>
+            <h3>Zeitschriften</h3>
+            <p>Tageszeitungen, Magazine, regionale Presse.</p>
+          </article>
+
+          <!-- Sticker & Aufbügelbilder -->
+          <article class="cat-card reveal">
+            <span class="cat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v9l-6 6H6a3 3 0 0 1-3-3V6z"/><polyline points="15 21 15 15 21 15"/></svg></span>
+            <h3>Sticker & Aufbügelbilder</h3>
+            <p>Für Kinder und kreative Köpfe.</p>
+          </article>
+
+          <!-- Souvenirs -->
+          <article class="cat-card reveal">
+            <span class="cat-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg></span>
+            <h3>Souvenirs</h3>
+            <p>Für jede Gelegenheit, lasst euch überraschen :-).</p>
+          </article>
+        </div>
+
+        <div class="hint-box reveal">
+          💡 <em>Etwas Bestimmtes gesucht? <strong>Schreiben Sie uns</strong> — wir bestellen gerne auf Wunsch.</em>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================================
+         SEKTION 5: ÜBER UNS
+         ============================================================= -->
+    <section class="section section--light about" id="about">
+      <div class="container">
+        <div class="layout">
+          <div class="reveal">
+            <span class="eyebrow">Über uns</span>
+            <h2>Vom Wunsch zum Wunderladen</h2>
+
+            <p>
+              Nach langen Jahren in Bürotätigkeiten, einer Ausbildung zur Kauffrau für Bürokommunikation
+              und einer Zeit als Schulbegleiterin wuchs in <strong style="color:var(--color-gold);">Kristina Ohar</strong>
+              ein lange gehegter Traum: ein eigener Laden, mit Menschen, mit Geschichte.
+            </p>
+            <p>
+              Schon früher hatte sie davon geträumt, einen Tante-Emma-Laden zu führen. Während einer
+              Anstellung in einem anderen Schreibwarenladen reifte der Wunsch nach etwas Eigenem. Bei
+              einem Spaziergang sah sie dann den Aushang, dass am Marktplatz eine neue Inhaberin gesucht
+              wurde — und ihr Mann hatte heimlich im Hintergrund schon alles vorbereitet, um sie damit
+              zu überraschen.
+            </p>
+            <p>
+              Am 1. Juni 2026 hat Kristina die Wundertüte übernommen.
+              <em>Aus dem Traum ist ein Laden für Lauf geworden.</em>
+            </p>
+
+            <blockquote class="quote-block large">
+              Mir geht es um die Bewohner von Lauf. Ich möchte den Menschen das geben, was sie sich
+              wünschen. Es ist nicht mein Laden — es ist ein Laden für meine Kunden.
+              <cite>— Kristina Ohar</cite>
+            </blockquote>
+
+            <blockquote class="quote-block small">
+              Mein Mann war der Initiator. Er hat heimlich im Hintergrund alles vorbereitet und mich
+              dann damit überrascht.
+              <cite>— Kristina Ohar</cite>
+            </blockquote>
+          </div>
+
+          <div class="about-photo reveal">
+            <!-- Platzhalter-Bild für Kristina -->
+            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=700&h=900&fit=crop&q=80" alt="Platzhalter-Porträt — Foto der Inhaberin folgt" loading="lazy">
+            <span class="photo-tag">Foto folgt · Platzhalter</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================================
+         SEKTION 6: NACHHALTIGKEIT
+         ============================================================= -->
+    <section class="section section--dark nachhaltigkeit" id="nachhaltigkeit">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow" style="color: var(--color-green);">Nachhaltigkeit & Regionales</span>
+          <h2>Wir denken weiter</h2>
+          <p class="lead">Kleine Entscheidungen, die einen Unterschied machen.</p>
+        </div>
+
+        <div class="nh-grid">
+          <div class="nh-item reveal">
+            <div class="nh-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+            </div>
+            <h3>Nachfüllen statt wegwerfen</h3>
+            <p>Minenwechsel bei Kugelschreibern und Stiften — viele unserer Schreibgeräte sind nachfüllbar. Das spart Müll und ist auf lange Sicht günstiger.</p>
+          </div>
+
+          <div class="nh-item reveal">
+            <div class="nh-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v6m0 0a4 4 0 0 1-4-4 4 4 0 0 1 8 0 4 4 0 0 1-4 4z"/><path d="M5 22V12a7 7 0 0 1 14 0v10"/><line x1="5" y1="22" x2="19" y2="22"/></svg>
+            </div>
+            <h3>Nachhaltige Hersteller im Fokus</h3>
+            <p>Wir achten bei der Auswahl unseres Sortiments zunehmend auf Hersteller, die umweltbewusst produzieren — vom Recyclingpapier bis zu plastikfreien Verpackungen.</p>
+          </div>
+
+          <div class="nh-item reveal">
+            <div class="nh-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <h3>Regional verwurzelt</h3>
+            <p>Wo immer es geht, bevorzugen wir Produkte aus der Region. Lauf und Umgebung haben viel zu bieten.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================================
+         SEKTION 8: FEEDBACK
+         ============================================================= -->
+    <section class="section section--light feedback" id="feedback">
+      <div class="container inner reveal">
+        <span class="eyebrow">Ihre Meinung</span>
+        <h2>Ihre Meinung gehört dazu</h2>
+        <p>
+          Bei uns gibt es eine Ideenbox im Laden — und einen digitalen Briefkasten hier.
+          Was würden Sie sich wünschen? Welches Produkt vermissen Sie? Was können wir besser machen?
+        </p>
+        <button class="btn btn--primary" id="feedbackBtn" type="button" aria-expanded="false" aria-controls="feedbackFallback">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          Wunsch oder Idee teilen
+        </button>
+        <div class="feedback-fallback" id="feedbackFallback" role="region" aria-live="polite">
+          Vielen Dank für Ihr Interesse! Ein Online-Formular folgt in Kürze.<br>
+          Bis dahin freuen wir uns über Ihre Nachricht an
+          <a href="mailto:" style="color:var(--color-green); text-decoration:underline;"><span class="ph">[E-MAIL]</span></a>
+          oder per Anruf unter <span class="ph">[TELEFON]</span>.
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================================
+         SEKTION 9: KONTAKT
+         ============================================================= -->
+    <section class="section section--dark kontakt" id="kontakt">
+      <div class="container">
+        <div class="layout">
+          <div class="contact-block reveal">
+            <span class="eyebrow">Kontakt</span>
+            <h2>So erreichen Sie uns</h2>
+
+            <address>
+              <strong>Wundertüte</strong><br>
+              Inhaberin: Kristina Ohar<br>
+              Marktplatz 4<br>
+              91207 Lauf an der Pegnitz
+            </address>
+
+            <p class="label-mini">Direkter Draht</p>
+            <ul class="contact-list">
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <a href="tel:+49">Telefon: <span class="ph">[TELEFON]</span></a>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <a href="mailto:">E-Mail: <span class="ph">[E-MAIL]</span></a>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                <a href="https://wa.me/">WhatsApp: <span class="ph">[WHATSAPP]</span></a>
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                <a href="https://www.instagram.com/wundertuete2026/" target="_blank" rel="noopener">@wundertuete2026</a>
+              </li>
+            </ul>
+
+            <div class="pay-block">
+              <strong>Zahlungsarten im Laden:</strong>
+              <div class="pay-tags">
+                <span>Bargeld</span>
+                <span>EC-Karte (ohne Mindestbetrag)</span>
+                <span>Kreditkarten</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="map-frame reveal" id="mapFrame">
+            <div class="map-consent" id="mapConsent">
+              <p>Die Karte wird von OpenStreetMap bereitgestellt. Beim Laden werden Daten (z.&nbsp;B. Ihre IP-Adresse) an OpenStreetMap übermittelt.</p>
+              <button type="button" class="btn btn--primary" id="mapLoadBtn">Karte anzeigen</button>
+              <p class="map-consent-hint">oder <a href="#" data-cookie-settings>Cookie-Einstellungen öffnen</a></p>
+            </div>
+            <div id="mapContainer" hidden></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =============================================================
+       SEKTION 10: FOOTER
+       ============================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#top" class="brand">
+            <img src="Wundertuete_Logo_Paket_transparent.png" alt="" class="brand-mark" width="72" height="72" aria-hidden="true">
+            <span>Wundertüte</span>
+          </a>
+          <p>Schreibwaren, Snacks und Geschichten am Marktplatz Lauf.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Schnell</h4>
+          <ul>
+            <li><a href="#quickinfo">Öffnungszeiten</a></li>
+            <li><a href="#sortiment">Sortiment</a></li>
+            <li><a href="#about">Über uns</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Rechtliches</h4>
+          <ul>
+            <li><a href="impressum.html">Impressum</a></li>
+            <li><a href="datenschutz.html">Datenschutz</a></li>
+            <li><a href="#" data-cookie-settings>Cookie-Einstellungen</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        © 2026 Wundertüte · Kristina Ohar · Marktplatz 4, 91207 Lauf an der Pegnitz
+      </div>
+    </div>
+  </footer>
+
+  <!-- =============================================================
+       SCHEMA.ORG — LocalBusiness JSON-LD
+       ============================================================= -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "Wundertüte",
+    "description": "Schreibwaren, Büromaterial, Druckservice, Heliumballons, Snacks und Lotto am Marktplatz Lauf.",
+    "url": "",
+    "image": "",
+    "telephone": "[TELEFON]",
+    "email": "[E-MAIL]",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Marktplatz 4",
+      "postalCode": "91207",
+      "addressLocality": "Lauf an der Pegnitz",
+      "addressCountry": "DE"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 49.5113,
+      "longitude": 11.2812
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "08:00",
+        "closes": "18:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday",
+        "opens": "08:00",
+        "closes": "13:00"
+      }
+    ],
+    "sameAs": ["https://www.instagram.com/wundertuete2026/"],
+    "founder": { "@type": "Person", "name": "Kristina Ohar" },
+    "paymentAccepted": "Bargeld, EC-Karte, Kreditkarte",
+    "currenciesAccepted": "EUR"
+  }
+  </script>
+
+  <!-- =============================================================
+       JAVASCRIPT
+       ============================================================= -->
+  <script>
+    // ---- 1) Sticky Header Blur ----
+    const header = document.getElementById('siteHeader');
+    const onScroll = () => {
+      if (window.scrollY > 24) header.classList.add('is-scrolled');
+      else header.classList.remove('is-scrolled');
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // ---- 2) "Jetzt geöffnet"-Status ----
+    // Mo-Fr: 8-18, Sa: 8-13, So: zu
+    const HOURS = {
+      0: null,            // Sonntag
+      1: [8, 18], 2: [8, 18], 3: [8, 18], 4: [8, 18], 5: [8, 18],
+      6: [8, 13]          // Samstag
+    };
+    const DAYS_DE = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+
+    function calcStatus() {
+      const now = new Date();
+      const day = now.getDay();
+      const hour = now.getHours() + now.getMinutes() / 60;
+      const today = HOURS[day];
+
+      if (today && hour >= today[0] && hour < today[1]) {
+        const closeH = today[1];
+        return { open: true, text: `Jetzt geöffnet · bis ${closeH}:00 Uhr` };
+      }
+
+      // Nächste Öffnung finden
+      for (let i = 0; i <= 7; i++) {
+        const checkDay = (day + i) % 7;
+        const slot = HOURS[checkDay];
+        if (!slot) continue;
+        if (i === 0 && hour < slot[0]) {
+          return { open: false, text: `Geschlossen — öffnet heute um ${slot[0]}:00 Uhr` };
+        }
+        if (i === 1) {
+          return { open: false, text: `Geschlossen — öffnet morgen um ${slot[0]}:00 Uhr` };
+        }
+        if (i > 1) {
+          return { open: false, text: `Geschlossen — öffnet ${DAYS_DE[checkDay]} um ${slot[0]}:00 Uhr` };
+        }
+      }
+      return { open: false, text: 'Geschlossen' };
+    }
+
+    function applyStatus() {
+      const s = calcStatus();
+      const text = document.getElementById('openStatusText');
+      const dot = document.getElementById('openStatusDot');
+      const pill = document.getElementById('openStatus');
+      if (text) text.textContent = s.text;
+      if (pill) pill.classList.toggle('is-closed', !s.open);
+      if (dot) dot.classList.toggle('is-closed', !s.open);
+
+      const heroText = document.getElementById('heroStatusText');
+      const heroDot = document.getElementById('heroStatusDot');
+      if (heroText) heroText.textContent = s.text;
+      if (heroDot) heroDot.classList.toggle('is-closed', !s.open);
+    }
+    applyStatus();
+    setInterval(applyStatus, 60000);
+
+    // ---- 3) Mobile Burger-Menü ----
+    const burger = document.getElementById('burgerBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    burger.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('is-open');
+      burger.setAttribute('aria-expanded', String(isOpen));
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    });
+    mobileNav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        mobileNav.classList.remove('is-open');
+        burger.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // ---- 4) Feedback-Button öffnet Fallback-Block ----
+    const fbBtn = document.getElementById('feedbackBtn');
+    const fbBlock = document.getElementById('feedbackFallback');
+    fbBtn.addEventListener('click', () => {
+      const isOpen = fbBlock.classList.toggle('is-open');
+      fbBtn.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    // ---- 7) Scroll-Reveal (Intersection Observer) ----
+    const revealEls = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry, idx) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => entry.target.classList.add('is-visible'), idx * 60);
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      revealEls.forEach(el => io.observe(el));
+    } else {
+      revealEls.forEach(el => el.classList.add('is-visible'));
+    }
+  </script>
+  <script src="cookie-consent.js"></script>
+</body>
+</html>

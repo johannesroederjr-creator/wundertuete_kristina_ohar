@@ -1,0 +1,115 @@
+INFODOKUMENT ZU COOKIE-BANNER
+Website: Wundertüte (Marktplatz Lauf)
+Stand: Juni 2026
+Zweck: Kurzinformation für Kundin und rechtliche Prüfung
+
+
+1. WORUM GEHT ES?
+
+Auf der Website gibt es ein Cookie-Banner (Einwilligungs-Hinweis am unteren Bildschirmrand).
+Es wurde ohne externen Anbieter (z. B. Cookiebot) direkt in die Website eingebaut.
+
+Das Banner fragt Besucher, ob optionale externe Inhalte geladen werden dürfen.
+Erst nach Zustimmung wird die OpenStreetMap-Karte im Kontaktbereich geladen.
+
+
+2. WAS MACHT DAS BANNER KONKRET?
+
+Beim ersten Besuch (oder wenn noch keine Auswahl gespeichert ist):
+- Das Banner erscheint unten auf der Seite.
+- Die Karte im Bereich „Kontakt“ wird NICHT automatisch geladen.
+- Stattdessen sieht der Besucher einen Hinweistext und den Button „Karte anzeigen“.
+
+Der Besucher kann wählen:
+
+  a) „Nur notwendige“
+     → Keine externe Karte. Es wird nur die technisch nötige Speicherung der Entscheidung gespeichert.
+
+  b) „Einstellungen“
+     → Detailauswahl mit zwei Kategorien (siehe Abschnitt 3).
+
+  c) „Alle akzeptieren“
+     → Externe Medien (Karte) werden erlaubt und die Karte wird geladen.
+
+Die Auswahl kann jederzeit über „Cookie-Einstellungen“ im Footer geändert werden.
+Bei Widerruf der Karten-Einwilligung wird die Karte wieder entfernt.
+
+
+3. WELCHE KATEGORIEN GIBT ES?
+
+NOTWENDIG (immer aktiv, nicht abschaltbar)
+- Speichert die Cookie-Einstellung im Browser (localStorage).
+- Schlüssel: wundertuete_consent
+- Inhalt: ob externe Medien erlaubt sind + Zeitstempel der Entscheidung
+- Kein Tracking, kein Marketing, keine Statistik
+
+EXTERNE MEDIEN (optional, nur mit Einwilligung)
+- OpenStreetMap-Karte auf der Startseite (Kontaktbereich)
+- Beim Laden: Verbindung zu OpenStreetMap-Servern, u. a. Übermittlung der IP-Adresse
+- Wird erst nach Einwilligung oder Klick auf „Karte anzeigen“ geladen
+
+
+4. WAS WIRD NICHT ÜBER DAS BANNER GESTEUERT?
+
+Folgende Punkte sind bewusst NICHT Teil des Cookie-Banners:
+
+- Kein Google Analytics, kein Facebook-Pixel, kein Marketing-Tracking
+- Schriftarten (Fraunces, Inter Tight) werden lokal vom eigenen Webserver geladen
+  → kein Aufruf von Google Fonts
+- Links zu Instagram/WhatsApp/Google Maps (normale Links, kein eingebetteter Inhalt)
+- Server-Logfiles beim Hosting (Standard des Webhosters — in Datenschutzerklärung erwähnt)
+- Externe Platzhalter-Bilder von Unsplash auf der Startseite
+  → diese laden derzeit noch direkt beim Seitenaufruf (ohne Einwilligung)
+  → steht in der Datenschutzerklärung; ggf. noch anpassen oder Bilder lokal speichern
+
+
+5. WO IST DAS BANNER AKTIV?
+
+Auf allen Seiten der Website:
+- index.html (Startseite)
+- impressum.html
+- datenschutz.html
+
+Technische Dateien:
+- cookie-consent.js   (Logik: Banner, Speicherung, Karte laden/entfernen)
+- cookie-consent.css  (Darstellung des Banners)
+- datenschutz.html    (rechtliche Beschreibung für Besucher)
+
+
+6. WIE WIRD DIE ENTSCHEIDUNG GESPEICHERT?
+
+- Speicherort: localStorage im Browser des Besuchers (kein klassisches Cookie)
+- Dauer: bis der Besucher die Einstellung ändert oder Browser-Daten löscht
+- Keine Weitergabe an Dritte (außer: bei erlaubter Karte → OpenStreetMap beim Kartenaufruf)
+
+
+7. HINWEISE FÜR DIE RECHTSPRÜFUNG
+
+Bitte prüfen lassen:
+
+□ Ist die Formulierung in Datenschutzerklärung (Abschnitt 4 + 5) vollständig und korrekt?
+□ Reicht localStorage als Nachweis der Einwilligung? (Kein serverseitiges Consent-Log)
+□ Sind die Unsplash-Platzhalterbilder so in Ordnung oder sollten sie lokal gehostet werden?
+□ Server-Logfiles beim Hoster: Aufbewahrungsfrist und Rechtsgrundlage konkretisieren
+□ Kontaktdaten ([TELEFON], [E-MAIL]) in Impressum/Datenschutz noch ergänzen
+□ USt-IdNr. im Impressum: falls nicht vorhanden, Abschnitt entfernen
+
+Umgesetzt als datenschutzfreundliche Basis:
+✓ Kein Tracking/Marketing
+✓ Schriften lokal gehostet
+✓ Karte blockiert bis zur Einwilligung
+✓ Ablehnen-Option („Nur notwendige“) vorhanden
+✓ Widerruf über Footer-Link möglich
+✓ Link zur Datenschutzerklärung im Banner
+
+
+8. KURZ FASSUNG FÜR DIE KUNDIN
+
+„Wenn jemand unsere Website zum ersten Mal besucht, erscheint unten ein Hinweis zu Cookies.
+Er kann ablehnen oder zustimmen. Die Karte auf der Seite lädt nur, wenn er das erlaubt.
+Wir tracken niemanden und nutzen kein Google Analytics. Die Schriftarten kommen von unserem
+eigenen Server, nicht von Google. Die Einstellung kann jederzeit im Footer unter
+‚Cookie-Einstellungen‘ geändert werden.“
+
+
+— Ende des Infodokuments —
