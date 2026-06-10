@@ -574,6 +574,13 @@
       font-style: italic;
     }
     .hint-box strong { color: var(--color-green-bright); font-style: normal; }
+    .hint-box a {
+      color: var(--color-green-bright);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .hint-box a:hover { color: var(--color-gold-bright); }
+    .hint-box a strong { color: inherit; font-style: normal; }
 
     /* =============================================================
        SEKTION 5: ÜBER UNS
@@ -1029,7 +1036,7 @@
             <h3>Wir sind für Sie da</h3>
             <div>
               <p style="margin: 0 0 0.3rem 0; color: var(--color-cream);">Telefon: <span class="ph">[TELEFON]</span></p>
-              <p style="margin: 0 0 0.3rem 0; color: var(--color-cream);">E-Mail: <a href="mailto:service@wundertuete-lauf.de" style="color: var(--color-gold-bright);">service@wundertuete-lauf.de</a></p>
+              <p style="margin: 0 0 0.3rem 0; color: var(--color-cream);">E-Mail: <a href="mailto:service@wundertuete-lauf.de" style="color: var(--color-gold-bright); text-decoration: underline; text-underline-offset: 2px;">service@wundertuete-lauf.de</a></p>
               <p style="margin: 0; color: var(--color-text-muted); font-size: 0.9rem;">WhatsApp: folgt</p>
             </div>
             <div class="card-actions">
@@ -1142,7 +1149,7 @@
         </div>
 
         <div class="hint-box reveal">
-          💡 <em>Etwas Bestimmtes gesucht? <strong>Schreiben Sie uns</strong> — wir bestellen gerne auf Wunsch.</em>
+          💡 <em>Etwas Bestimmtes gesucht? <a href="mailto:service@wundertuete-lauf.de?subject=Bestellwunsch"><strong>Schreiben Sie uns</strong></a> — wir bestellen gerne auf Wunsch.</em>
         </div>
       </div>
     </section>
