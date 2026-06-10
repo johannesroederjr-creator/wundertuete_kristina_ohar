@@ -51,11 +51,19 @@
     var placeholder = document.getElementById('mapConsent');
     if (!container || container.dataset.loaded === 'true') return;
 
-    container.innerHTML =
-      '<iframe src="' + MAP_EMBED_URL + '" title="' + MAP_TITLE + '" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>';
-    container.dataset.loaded = 'true';
-    container.hidden = false;
     if (placeholder) placeholder.hidden = true;
+    container.hidden = false;
+
+    var iframe = document.createElement('iframe');
+    iframe.src = MAP_EMBED_URL;
+    iframe.title = MAP_TITLE;
+    iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+    iframe.setAttribute('allowfullscreen', '');
+    iframe.loading = 'eager';
+
+    container.innerHTML = '';
+    container.appendChild(iframe);
+    container.dataset.loaded = 'true';
   }
 
   function initMap() {
